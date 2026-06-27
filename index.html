@@ -1266,10 +1266,10 @@ footer{
 
   <div class="mh-quick-replies">
     <button class="mh-quick-btn" data-question="What does MH CreativeWorks do?">What do you do?</button>
-    <button class="mh-quick-btn" data-question="What custom projects can you help with?">Custom projects</button>
-    <button class="mh-quick-btn" data-question="Do you create worship backing tracks?">Worship tracks</button>
     <button class="mh-quick-btn" data-question="What is your production approach?">Production approach</button>
-    <button class="mh-quick-btn" data-question="How do I request a project?">Request project</button>
+    <button class="mh-quick-btn" data-question="What is your creative process?">Creative process</button>
+    <button class="mh-quick-btn" data-question="Do you create worship resources?">Worship resources</button>
+    <button class="mh-quick-btn" data-question="How do I start a project?">Start a project</button>
   </div>
 
   <div class="mh-chat-composer">
@@ -1406,8 +1406,17 @@ const mhChatAnswers = [
     text:"Worship resources are one lane of MH CreativeWorks. Backing tracks and stems can be prepared for platforms such as Loop Community, giving churches a trusted place for access, delivery, and licensing-related support."
   },
   {
-    keywords:["production approach","approach","studio","workflow","sound","creative process","process","remote collaboration"],
+    keywords:["production approach","approach","studio","workflow","sound","remote collaboration"],
     text:"The production approach is centered on the song, story, and purpose first. Instead of focusing on a gear list, MH CreativeWorks focuses on shaping ideas into usable productions through composition, arrangement, editing, collaboration, and creative direction."
+  },
+  {
+    keywords:["creative process","process","interview","artist interview","artist","genre","style","instrument","instrumentation","music preference","preferences","vision","inspiration","influences"],
+    text:"Every project begins with a conversation. Before writing or producing anything, I take time to understand the creative vision behind your project.
+
+We’ll talk through the story or message you want to communicate, musical genre and overall style, artists or songs that inspire the sound you are hearing, instrumentation and sonic direction, where the music will be used, what stage your project is currently in, and your goals for the finished production.
+
+The goal is not to copy another artist. The goal is to understand the direction you are imagining so we can create something that feels uniquely yours.",
+    action:"project"
   },
   {
     keywords:["platforms","youtube","spotify","apple music","film catalog","media catalog","custom production"],
@@ -1550,7 +1559,7 @@ mhQuickButtons.forEach(button => {
   });
 });
 
-mhAddChatMessage("Hi, I’m the MH CreativeWorks assistant. I can answer questions about composition, production, collaboration, featured audio, worship resources, the creative process, and project requests.", "bot");
+mhAddChatMessage("Hi, I’m the MH CreativeWorks assistant. I can answer questions based on this page about composition, production, collaboration, featured audio, worship resources, the creative process, and project requests.", "bot");
 
 
 
