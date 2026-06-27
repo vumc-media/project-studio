@@ -137,6 +137,189 @@ img{max-width:100%;display:block;}
 .nav-links a{color:var(--soft);}
 .nav-links a:hover{color:var(--accent);}
 
+.mobile-menu-btn{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.06);
+  color:white;
+  font-size:1.55rem;
+  line-height:1;
+  cursor:pointer;
+}
+
+.mobile-menu-btn:hover{
+  border-color:rgba(255,255,255,.36);
+  background:rgba(255,255,255,.10);
+}
+
+.mobile-menu-btn span{
+  display:block;
+  transform:translateY(-1px);
+}
+
+/* FLOATING CHAT */
+
+.chat-widget{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:2500;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.chat-launcher{
+  width:70px;
+  height:70px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.22);
+  background:linear-gradient(145deg, rgba(17,24,39,.96), rgba(10,14,24,.96));
+  box-shadow:0 18px 55px rgba(0,0,0,.50);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.chat-launcher img{
+  width:54px;
+  height:54px;
+  object-fit:contain;
+  border-radius:14px;
+}
+
+.chat-panel{
+  display:none;
+  position:absolute;
+  right:0;
+  bottom:84px;
+  width:360px;
+  max-width:calc(100vw - 32px);
+  background:linear-gradient(145deg,#121a2a,#0e1421);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  box-shadow:0 28px 80px rgba(0,0,0,.62);
+  overflow:hidden;
+}
+
+.chat-panel.show{
+  display:block;
+}
+
+.chat-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem 1rem .85rem;
+  border-bottom:1px solid var(--border);
+}
+
+.chat-title{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  font-weight:900;
+}
+
+.chat-title img{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+}
+
+.chat-title span{
+  display:block;
+  font-size:.9rem;
+  line-height:1.15;
+}
+
+.chat-title small{
+  display:block;
+  margin-top:.12rem;
+  color:var(--muted);
+  font-size:.68rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.chat-close{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:white;
+  cursor:pointer;
+  font-size:1.2rem;
+}
+
+.chat-body{
+  padding:1rem;
+}
+
+.chat-message{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:18px;
+  padding:.85rem;
+  color:#e7edf9;
+  font-size:.92rem;
+  line-height:1.5;
+  margin-bottom:1rem;
+}
+
+.chat-questions{
+  display:grid;
+  gap:.55rem;
+}
+
+.chat-question{
+  width:100%;
+  text-align:left;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.045);
+  color:white;
+  border-radius:14px;
+  padding:.78rem .85rem;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.chat-question:hover{
+  background:rgba(79,140,255,.16);
+  border-color:rgba(79,140,255,.45);
+}
+
+.chat-answer{
+  margin-top:1rem;
+  color:#d8e0ef;
+  font-size:.92rem;
+  line-height:1.55;
+  background:rgba(79,140,255,.10);
+  border:1px solid rgba(79,140,255,.22);
+  border-radius:18px;
+  padding:.9rem;
+  display:none;
+}
+
+.chat-answer.show{
+  display:block;
+}
+
+.chat-answer .btn{
+  width:100%;
+  margin-top:.85rem;
+  min-height:46px;
+  font-size:.9rem;
+}
+
+
 /* HERO */
 
 .hero{
@@ -592,7 +775,31 @@ footer{
 /* RESPONSIVE */
 
 @media(max-width:900px){
-  .nav-links{display:none;}
+  .mobile-menu-btn{display:flex;}
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    padding:1rem;
+    background:rgba(5,8,14,.98);
+    border-bottom:1px solid var(--border);
+    flex-direction:column;
+    align-items:stretch;
+    gap:.35rem;
+  }
+
+  .nav-links.show{display:flex;}
+
+  .nav-links a{
+    display:block;
+    padding:1rem;
+    border-radius:14px;
+    background:rgba(255,255,255,.045);
+    text-align:center;
+  }
 
   .nav-wrap{min-height:78px;}
 
@@ -639,6 +846,28 @@ footer{
 }
 
 @media(max-width:600px){
+  .chat-widget{
+    right:14px;
+    bottom:14px;
+  }
+
+  .chat-launcher{
+    width:62px;
+    height:62px;
+    border-radius:20px;
+  }
+
+  .chat-launcher img{
+    width:48px;
+    height:48px;
+  }
+
+  .chat-panel{
+    right:0;
+    bottom:76px;
+    width:calc(100vw - 28px);
+  }
+
   .hero-actions{
     display:grid;
     grid-template-columns:1fr;
@@ -663,7 +892,9 @@ footer{
       </span>
     </a>
 
-    <div class="nav-links">
+    <button class="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()"><span>☰</span></button>
+
+    <div class="nav-links" id="navLinks">
       <a href="#">Home</a>
       <a href="#listen">Listen</a>
       <a href="#services">Services</a>
@@ -948,6 +1179,42 @@ footer{
   © 2026 MH CreativeWorks
 </footer>
 
+
+<div class="chat-widget" aria-live="polite">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-title">
+        <img src="media/MH.webp" alt="MH CreativeWorks logo">
+        <div>
+          <span>MH CreativeWorks</span>
+          <small>Quick Answers</small>
+        </div>
+      </div>
+      <button class="chat-close" type="button" aria-label="Close chat" onclick="toggleChat(false)">×</button>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-message">
+        Hi! Choose a quick question below. If your project needs a personal reply, I can open the project conversation form.
+      </div>
+
+      <div class="chat-questions">
+        <button class="chat-question" type="button" onclick="showChatAnswer('services')">What services do you offer?</button>
+        <button class="chat-question" type="button" onclick="showChatAnswer('start')">How do I start a project?</button>
+        <button class="chat-question" type="button" onclick="showChatAnswer('worship')">Do you create worship resources?</button>
+        <button class="chat-question" type="button" onclick="showChatAnswer('listen')">Where can I hear examples?</button>
+        <button class="chat-question" type="button" onclick="showChatAnswer('custom')">Can you help with lyrics or a rough idea?</button>
+      </div>
+
+      <div class="chat-answer" id="chatAnswer"></div>
+    </div>
+  </div>
+
+  <button class="chat-launcher" type="button" aria-label="Open MH CreativeWorks chat" onclick="toggleChat()">
+    <img src="media/MH.webp" alt="MH CreativeWorks chat">
+  </button>
+</div>
+
 <div id="contactModal" class="modal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeContactForm()">×</button>
@@ -1035,6 +1302,46 @@ footer{
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxF6MMH3_t53SuX8man44Nzly8JCgbPS5TM4hFRD04dwOBS4hh5cMR-A94Hk82bVyCk8g/exec";
+
+function toggleMenu(){
+  const navLinks = document.getElementById("navLinks");
+  const menuButton = document.querySelector(".mobile-menu-btn");
+  const isOpen = navLinks.classList.toggle("show");
+  menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
+document.querySelectorAll("#navLinks a").forEach(function(link){
+  link.addEventListener("click", function(){
+    const navLinks = document.getElementById("navLinks");
+    const menuButton = document.querySelector(".mobile-menu-btn");
+    navLinks.classList.remove("show");
+    menuButton.setAttribute("aria-expanded", "false");
+  });
+});
+
+function toggleChat(forceState){
+  const panel = document.getElementById("chatPanel");
+  if(typeof forceState === "boolean"){
+    panel.classList.toggle("show", forceState);
+  }else{
+    panel.classList.toggle("show");
+  }
+}
+
+function showChatAnswer(type){
+  const answer = document.getElementById("chatAnswer");
+  const answers = {
+    services: "MH CreativeWorks offers original song demos, music for lyrics, cinematic and media music, audio editing, arrangement support, worship resources, and creative collaboration.",
+    start: "Every project begins with a conversation about your idea, sound, story, purpose, and timeline. Use the button below to send the project request form.",
+    worship: "Yes. Worship resources, backing tracks, stems, and creative worship production are part of the MH CreativeWorks lane. Released worship resources may also be shared through trusted platforms like Loop Community.",
+    listen: "The featured demo section includes the track My Shepherd. More demos, cinematic cues, edits, and worship resources can be added as the catalog grows.",
+    custom: "Yes. You can start with lyrics, a melody, a rough phone recording, an existing track that needs editing, or even a general idea. The goal is to shape the idea into something clear and useful."
+  };
+
+  answer.innerHTML = answers[type] + '<button class="btn" type="button" onclick="openContactForm(); toggleChat(false);">Start a Project Conversation</button>';
+  answer.classList.add("show");
+}
+
 
 function openContactForm(){
   document.getElementById("contactModal").classList.add("show");
