@@ -801,6 +801,36 @@ footer{
   background:rgba(255,255,255,.12);
 }
 
+.mh-chat-reply-email{
+  padding:12px 14px 0;
+  background:#0f1522;
+  border-top:1px solid var(--border);
+}
+
+.mh-chat-reply-email label{
+  display:block;
+  color:#a9b4c8;
+  font-size:.74rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.mh-chat-reply-email input{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:#0b0f16;
+  color:white;
+  padding:11px 14px;
+  font-size:.9rem;
+}
+
+.mh-chat-reply-email input::placeholder{
+  color:#748094;
+}
+
 .mh-chat-composer{
   display:flex;
   gap:9px;
@@ -1262,6 +1292,11 @@ footer{
     <button class="mh-quick-btn" data-question="How do I start a project?">Start a project</button>
   </div>
 
+  <div class="mh-chat-reply-email">
+    <label for="mhChatEmail">Email for personal reply</label>
+    <input type="email" id="mhChatEmail" placeholder="Optional — only needed if your question needs follow-up" autocomplete="email">
+  </div>
+
   <div class="mh-chat-composer">
     <input type="text" id="mhChatInput" placeholder="Ask me about production, songwriting, demos, worship resources, or starting a project." autocomplete="off">
     <button id="mhChatSend" type="button">Send</button>
@@ -1362,6 +1397,7 @@ const mhChatWidget = document.getElementById("mhChatWidget");
 const mhChatClose = document.getElementById("mhChatClose");
 const mhChatBody = document.getElementById("mhChatBody");
 const mhChatInput = document.getElementById("mhChatInput");
+const mhChatEmail = document.getElementById("mhChatEmail");
 const mhChatSend = document.getElementById("mhChatSend");
 const mhQuickButtons = document.querySelectorAll(".mh-quick-btn");
 
@@ -1464,6 +1500,15 @@ function mhNormalize(text){
   return text.toLowerCase().trim();
 }
 
+function mhIsValidEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function mhGetReplyEmail(){
+  const email = mhChatEmail ? mhChatEmail.value.trim() : "";
+  return mhIsValidEmail(email) ? email : "";
+}
+
 function mhFindAnswer(question){
   const clean = mhNormalize(question);
 
@@ -1477,6 +1522,8 @@ function mhFindAnswer(question){
 }
 
 async function mhSendUnansweredQuestion(question){
+  const replyEmail = mhGetReplyEmail();
+
   try{
     await fetch(SCRIPT_URL, {
       method:"POST",
@@ -1486,13 +1533,13 @@ async function mhSendUnansweredQuestion(question){
       },
       body:JSON.stringify({
         name:"Website Chat Visitor",
-        email:"not-provided@mhcreativeworks.local",
+        email: replyEmail || "not-provided@mhcreativeworks.local",
         projectType:"Website Chat Question",
         projectStage:"Question asked in chat",
         soundDirection:"Not provided",
         message:question,
         timeline:"Not provided",
-        source:"MH CreativeWorks Website Chat"
+        source: replyEmail ? "MH CreativeWorks Website Chat - Reply Email Provided" : "MH CreativeWorks Website Chat - No Reply Email Provided"
       })
     });
   }catch(error){
@@ -1511,8 +1558,14 @@ function mhHandleQuestion(question){
     if(answer){
       mhAddChatMessage(answer.text, "bot", answer.action || null);
     }else{
+      const replyEmail = mhGetReplyEmail();
       mhSendUnansweredQuestion(question);
-      mhAddChatMessage("Thank you for the question. I do not want to guess beyond the information provided on this page, so your question has been forwarded for review. Please allow time for a personal reply. If this is about starting a project, you can also open the Project Conversation Form below.", "bot", "project");
+
+      if(replyEmail){
+        mhAddChatMessage("Thank you for the question. I do not want to guess beyond the information provided on this page, so your question has been forwarded for review. A reply can be sent to the email address you provided. If this is about starting a project, you can also open the Project Conversation Form below.", "bot", "project");
+      }else{
+        mhAddChatMessage("Thank you for the question. I do not want to guess beyond the information provided on this page, so your question has been forwarded for review. No reply email was provided. If you would like a personal reply, enter your email in the reply field and send your question again, or open the Project Conversation Form below.", "bot", "project");
+      }
     }
   }, 250);
 }
@@ -1549,7 +1602,7 @@ mhQuickButtons.forEach(button => {
   });
 });
 
-mhAddChatMessage("Hi, I’m the MH CreativeWorks assistant. I can answer questions about composition, production, collaboration, featured audio, worship resources, the creative process, and project requests.", "bot");
+mhAddChatMessage("Hi, I’m the MH CreativeWorks assistant. I can answer questions about composition, production, collaboration, featured audio, worship resources, the creative process, and project requests. If your question needs a personal reply, add your email in the reply field before sending.", "bot");
 
 
 
