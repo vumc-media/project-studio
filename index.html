@@ -1294,7 +1294,7 @@ footer{
 
   <div class="mh-chat-reply-email">
     <label for="mhChatEmail">Email for personal reply</label>
-    <input type="email" id="mhChatEmail" placeholder="Required only for questions outside the website scope" autocomplete="email">
+    <input type="email" id="mhChatEmail" placeholder="Enter email, then tap Send" autocomplete="email">
   </div>
 
   <div class="mh-chat-composer">
@@ -1569,14 +1569,17 @@ function mhSubmitPendingQuestion(){
   }
 
   if(!replyEmail){
-    mhAddChatMessage("Please enter a valid email address first, then tap Send Question With Email again.", "bot");
+    mhAddChatMessage("Please enter a valid email address in the Email for personal reply field, then tap Send.", "bot");
     mhChatEmail.focus();
     return;
   }
 
   mhSendUnansweredQuestion(mhPendingQuestion, replyEmail);
-  mhAddChatMessage("Thank you. Your question has been forwarded for review, and a personal reply can be sent to the email address you provided.", "bot");
+  mhAddChatMessage("Thank you. Your question has been sent for review. A personal reply can be sent to the email address you provided.", "bot");
+
   mhPendingQuestion = "";
+  mhChatInput.placeholder = "Ask me about production, songwriting, demos, worship resources, or starting a project.";
+  mhChatSend.textContent = "Send";
 }
 
 function mhHandleQuestion(question){
@@ -1589,26 +1592,43 @@ function mhHandleQuestion(question){
   setTimeout(() => {
     if(answer){
       mhAddChatMessage(answer.text, "bot", answer.action || null);
-    }else{
-      const replyEmail = mhGetReplyEmail();
-
-      if(!replyEmail){
-        mhPendingQuestion = question;
-        mhAddChatMessage("I do not want to guess beyond the information provided on this page. I can forward your question for review, but I need an email address first so someone can reply personally. Enter your email in the reply field, then tap the button below.", "bot", "email");
-        mhChatEmail.focus();
-        return;
-      }
-
-      mhSendUnansweredQuestion(question, replyEmail);
-      mhAddChatMessage("Thank you for the question. I do not want to guess beyond the information provided on this page, so your question has been forwarded for review. A personal reply can be sent to the email address you provided.", "bot");
+      return;
     }
+
+    mhPendingQuestion = question;
+    mhAddChatMessage("I do not want to respond with inaccurate information. This question is outside the information provided on the website. Please enter your email in the reply field below, then tap Send, and I’ll forward your question for a personal reply.", "bot");
+    mhChatEmail.focus();
+    mhChatInput.placeholder = "Enter email above, then tap Send";
+    mhChatSend.textContent = "Send";
   }, 250);
 }
 
 function mhSendCurrentQuestion(){
-  const question = mhChatInput.value;
-  if(!question.trim()) return;
-  mhHandleQuestion(question);
+  const typedText = mhChatInput.value.trim();
+  const replyEmail = mhGetReplyEmail();
+
+  if(mhPendingQuestion){
+    if(replyEmail){
+      mhSubmitPendingQuestion();
+      mhChatInput.value = "";
+      return;
+    }
+
+    if(mhIsValidEmail(typedText)){
+      mhChatEmail.value = typedText;
+      mhChatInput.value = "";
+      mhSubmitPendingQuestion();
+      return;
+    }
+
+    mhAddChatMessage("Please enter your email address first so a personal reply can be sent, then tap Send.", "bot");
+    mhChatEmail.focus();
+    return;
+  }
+
+  if(!typedText) return;
+
+  mhHandleQuestion(typedText);
   mhChatInput.value = "";
 }
 
@@ -1637,7 +1657,7 @@ mhQuickButtons.forEach(button => {
   });
 });
 
-mhAddChatMessage("Hi, I’m the MH CreativeWorks assistant. I can answer questions about composition, production, collaboration, featured audio, worship resources, the creative process, and project requests. If your question needs a personal reply, add your email in the reply field before sending.", "bot");
+mhAddChatMessage("Hi, I’m the MH CreativeWorks assistant. I can answer questions about composition, production, collaboration, featured audio, worship resources, the creative process, and project requests. If a question is outside the website information, I’ll ask for an email before sending it for review.", "bot");
 
 
 
