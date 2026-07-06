@@ -496,6 +496,107 @@ audio{
   box-shadow:0 18px 60px rgba(0,0,0,.28);
 }
 
+
+/* PORTFOLIO AUDIO CATALOG */
+
+.music-catalog{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.45rem;
+}
+
+.track-card{
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.025)),
+    var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 18px 60px rgba(0,0,0,.28);
+  padding:1.6rem;
+}
+
+.track-card.featured-track{
+  grid-column:1 / -1;
+  padding:2.2rem;
+  background:
+    radial-gradient(circle at top left, rgba(79,140,255,.18), transparent 34rem),
+    radial-gradient(circle at bottom right, rgba(139,92,246,.18), transparent 34rem),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025)),
+    var(--card);
+}
+
+.track-top{
+  display:flex;
+  gap:1.1rem;
+  align-items:center;
+  margin-bottom:1rem;
+}
+
+.track-art{
+  width:74px;
+  height:74px;
+  border-radius:20px;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.8rem;
+  color:#fff;
+  background:
+    radial-gradient(circle at top left, rgba(38,217,255,.42), transparent 55%),
+    linear-gradient(135deg,var(--accent),var(--accent2));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 14px 34px rgba(79,140,255,.18);
+}
+
+.track-info{
+  flex:1;
+  min-width:0;
+}
+
+.track-info h3{
+  font-size:1.28rem;
+  line-height:1.2;
+  margin-bottom:.25rem;
+}
+
+.track-info p{
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.track-card audio{
+  width:100%;
+  display:block;
+  min-height:54px;
+  margin-top:.9rem;
+}
+
+.track-link{
+  display:inline-flex;
+  margin-top:.9rem;
+  color:#dce7ff;
+  font-size:.82rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.track-link:hover{
+  color:var(--accent);
+}
+
+@media(max-width:900px){
+  .music-catalog{
+    grid-template-columns:1fr;
+  }
+
+  .track-card.featured-track{
+    grid-column:auto;
+  }
+}
+
+
 /* CONTACT */
 
 .contact{
@@ -1219,47 +1320,126 @@ footer{
     <div class="section-title">
       <div class="section-kicker">Portfolio</div>
       <h2>Featured Music</h2>
-      <p>Listen to current Track Lab work samples. More demos, cinematic cues, edits, arrangements, and worship resources will be added as the catalog grows.</p>
+      <p>
+        Listen to current Track Lab work samples. More demos, cinematic cues,
+        edits, arrangements, and worship resources will be added as the catalog grows.
+      </p>
     </div>
 
-    <div class="featured-audio">
-      <div class="audio-meta">Original Composition</div>
-      <h3>My Shepherd</h3>
-      <p>
-        Inspired by Psalm 23, this featured demo gives visitors a first listen to the
-        musical direction and production style behind Track Lab.
-      </p>
+    <div class="music-catalog">
+      <div class="track-card featured-track">
+        <div class="track-top">
+          <div class="track-art">♪</div>
+          <div class="track-info">
+            <div class="audio-meta">Original Composition</div>
+            <h3>My Shepherd</h3>
+            <p>Inspirational production inspired by Psalm 23.</p>
+          </div>
+        </div>
 
-      <audio controls preload="metadata" controlsList="nodownload" style="display:block;width:100%;min-height:54px;">
-        <source src="https://vumc-media.github.io/project-studio/media/audio/my-shepherd.mp3" type="audio/mpeg">
-        Your browser does not support HTML5 audio.
-      </audio>
+        <audio controls preload="metadata" controlsList="nodownload">
+          <source src="https://vumc-media.github.io/project-studio/media/audio/my-shepherd.mp3" type="audio/mpeg">
+          Your browser does not support HTML5 audio.
+        </audio>
 
-      <div style="margin-top:24px;">
-        <a class="btn" target="_blank" rel="noopener noreferrer"
-           href="https://vumc-media.github.io/project-studio/media/audio/my-shepherd.mp3">
-           Open Full Player
+        <a class="track-link" href="https://vumc-media.github.io/project-studio/media/audio/my-shepherd.mp3" target="_blank" rel="noopener noreferrer">
+          Open Full Player
         </a>
       </div>
-    </div>
+      <div class="track-card">
+        <div class="track-top">
+          <div class="track-art">♪</div>
+          <div class="track-info">
+            <div class="audio-meta">Cinematic / Instrumental</div>
+            <h3>Anthem at First Light</h3>
+            <p>A bright instrumental cue with a hopeful, cinematic feel.</p>
+          </div>
+        </div>
 
-    <div class="grid-3" style="margin-top:1.45rem;">
-      <div class="card">
-        <div class="card-icon">♪</div>
-        <h3>Original Song Demos</h3>
-        <p>Developing lyrics, melodies, and rough ideas into clear production concepts.</p>
+        <audio controls preload="metadata" controlsList="nodownload">
+          <source src="https://vumc-media.github.io/project-studio/media/audio/Anthem-at-First-Light.mp3" type="audio/mpeg">
+          Your browser does not support HTML5 audio.
+        </audio>
+
+        <a class="track-link" href="https://vumc-media.github.io/project-studio/media/audio/Anthem-at-First-Light.mp3" target="_blank" rel="noopener noreferrer">
+          Open Full Player
+        </a>
       </div>
+      <div class="track-card">
+        <div class="track-top">
+          <div class="track-art">♪</div>
+          <div class="track-info">
+            <div class="audio-meta">Cinematic / Reflective</div>
+            <h3>Echoes of the Unsaid</h3>
+            <p>A reflective piece shaped for emotion, atmosphere, and story.</p>
+          </div>
+        </div>
 
-      <div class="card">
-        <div class="card-icon">🎬</div>
-        <h3>Cinematic Cues</h3>
-        <p>Instrumental music for film-style, media, and sync-oriented catalog work.</p>
+        <audio controls preload="metadata" controlsList="nodownload">
+          <source src="https://vumc-media.github.io/project-studio/media/audio/Echoes-of-the-Unsaid.mp3" type="audio/mpeg">
+          Your browser does not support HTML5 audio.
+        </audio>
+
+        <a class="track-link" href="https://vumc-media.github.io/project-studio/media/audio/Echoes-of-the-Unsaid.mp3" target="_blank" rel="noopener noreferrer">
+          Open Full Player
+        </a>
       </div>
+      <div class="track-card">
+        <div class="track-top">
+          <div class="track-art">♪</div>
+          <div class="track-info">
+            <div class="audio-meta">Song Demo</div>
+            <h3>If It Not Mercy (It Ain't Jesus)</h3>
+            <p>A song-centered demo with a message-driven direction.</p>
+          </div>
+        </div>
 
-      <div class="card">
-        <div class="card-icon">☁</div>
-        <h3>Worship Resources</h3>
-        <p>Backing tracks and stems distributed through trusted platforms like Loop Community.</p>
+        <audio controls preload="metadata" controlsList="nodownload">
+          <source src="https://vumc-media.github.io/project-studio/media/audio/If-It-Not-Mercy-(It-Ain't-Jesus).mp3" type="audio/mpeg">
+          Your browser does not support HTML5 audio.
+        </audio>
+
+        <a class="track-link" href="https://vumc-media.github.io/project-studio/media/audio/If-It-Not-Mercy-(It-Ain't-Jesus).mp3" target="_blank" rel="noopener noreferrer">
+          Open Full Player
+        </a>
+      </div>
+      <div class="track-card">
+        <div class="track-top">
+          <div class="track-art">♪</div>
+          <div class="track-info">
+            <div class="audio-meta">Instrumental / Creative Cue</div>
+            <h3>Marble Fingers</h3>
+            <p>A creative instrumental track for showcasing arrangement and production texture.</p>
+          </div>
+        </div>
+
+        <audio controls preload="metadata" controlsList="nodownload">
+          <source src="https://vumc-media.github.io/project-studio/media/audio/Marble-Fingers.mp3" type="audio/mpeg">
+          Your browser does not support HTML5 audio.
+        </audio>
+
+        <a class="track-link" href="https://vumc-media.github.io/project-studio/media/audio/Marble-Fingers.mp3" target="_blank" rel="noopener noreferrer">
+          Open Full Player
+        </a>
+      </div>
+      <div class="track-card">
+        <div class="track-top">
+          <div class="track-art">♪</div>
+          <div class="track-info">
+            <div class="audio-meta">Cinematic / Media Cue</div>
+            <h3>Shifting Echoes</h3>
+            <p>A developing media cue with movement, atmosphere, and emotional space.</p>
+          </div>
+        </div>
+
+        <audio controls preload="metadata" controlsList="nodownload">
+          <source src="https://vumc-media.github.io/project-studio/media/audio/Shifting-Echoes.mp3" type="audio/mpeg">
+          Your browser does not support HTML5 audio.
+        </audio>
+
+        <a class="track-link" href="https://vumc-media.github.io/project-studio/media/audio/Shifting-Echoes.mp3" target="_blank" rel="noopener noreferrer">
+          Open Full Player
+        </a>
       </div>
     </div>
   </div>
