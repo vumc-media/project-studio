@@ -1261,12 +1261,6 @@ footer{
 </div>
 </div>
 </section>
-<div class="container">
-<div class="section-title">
-</div>
-</div>
-</div>
-</section>
 <section class="contact" id="contact">
 <div class="container">
 <div class="section-kicker">Contact</div>
@@ -1412,7 +1406,6 @@ const mhChatAnswers = [
     keywords:["styles","style","compose","cinematic","piano","ambient","soundscapes","instrumental","orchestral","reflective","hopeful","emotional"],
     text:"TrackLab focuses on cinematic piano, emotional underscore, ambient soundscapes, hopeful instrumental cues, reflective themes, and production music designed to support visual storytelling."
   },
-  {
   {
     keywords:["anthem at first light","paper lantern room","echoes of the unsaid","shifting echoes","marble fingers","featured cue"],
     text:"Those featured cues represent the current TrackLab direction: cinematic instrumentals, reflective themes, atmosphere, and story-focused production music."
@@ -1619,24 +1612,32 @@ function mhSendCurrentQuestion(){
   mhChatInput.value = "";
 }
 
-mhChatLauncher.addEventListener("click", function(){
-  mhChatWidget.classList.toggle("open");
-  if(mhChatWidget.classList.contains("open")){
-    mhChatInput.focus();
-  }
-});
+if(mhChatLauncher && mhChatWidget){
+  mhChatLauncher.addEventListener("click", function(){
+    mhChatWidget.classList.toggle("open");
+    if(mhChatWidget.classList.contains("open") && mhChatInput){
+      mhChatInput.focus();
+    }
+  });
+}
 
-mhChatClose.addEventListener("click", function(){
-  mhChatWidget.classList.remove("open");
-});
+if(mhChatClose && mhChatWidget){
+  mhChatClose.addEventListener("click", function(){
+    mhChatWidget.classList.remove("open");
+  });
+}
 
-mhChatSend.addEventListener("click", mhSendCurrentQuestion);
+if(mhChatSend){
+  mhChatSend.addEventListener("click", mhSendCurrentQuestion);
+}
 
-mhChatInput.addEventListener("keydown", function(e){
-  if(e.key === "Enter"){
-    mhSendCurrentQuestion();
-  }
-});
+if(mhChatInput){
+  mhChatInput.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+      mhSendCurrentQuestion();
+    }
+  });
+}
 
 mhQuickButtons.forEach(button => {
   button.addEventListener("click", function(){
@@ -1651,8 +1652,9 @@ mhAddChatMessage("Hi, I’m the TrackLab assistant. I can answer questions about
 function toggleMobileMenu(){
   const navLinks = document.querySelector(".nav-links");
   const menuButton = document.querySelector(".mobile-menu-btn");
-  const isOpen = navLinks.classList.toggle("show");
+  if(!navLinks || !menuButton) return;
 
+  const isOpen = navLinks.classList.toggle("show");
   menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
   menuButton.innerHTML = isOpen ? "×" : "☰";
 }
@@ -1660,6 +1662,7 @@ function toggleMobileMenu(){
 function closeMobileMenu(){
   const navLinks = document.querySelector(".nav-links");
   const menuButton = document.querySelector(".mobile-menu-btn");
+  if(!navLinks || !menuButton) return;
 
   navLinks.classList.remove("show");
   menuButton.setAttribute("aria-expanded", "false");
